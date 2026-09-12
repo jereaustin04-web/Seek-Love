@@ -3,205 +3,424 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Malawi Love - Facebook ya Chibwezi</title>
+<title>Malawi Love ❤️</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#f0f2f5}
-.header{background:#1877f2;color:white;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
-.logo{font-size:24px;font-weight:bold}
-.search{width:300px;padding:8px 15px;border-radius:20px;border:none}
-.main{display:flex;max-width:1300px;margin:20px auto;gap:15px;padding:0 10px}
-.left{width:250px;background:white;border-radius:10px;padding:15px;height:fit-content;position:sticky;top:80px}
-.left p{padding:10px;cursor:pointer;border-radius:8px}
-.left p:hover{background:#f0f2f5}
-.active-dating{background:#ffe6e6;color:#c1272d;font-weight:bold}
+body{background:#fff5f5}
+.header{background:linear-gradient(90deg,#c1272d,#ff4d6d);height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;position:sticky;top:0;z-index:100;color:white}
+.logo{font-weight:bold}
+.nav{display:flex;gap:8px;font-size:18px}
+.nav i{cursor:pointer;padding:8px 10px;border-radius:20px}
+.nav i.active{background:rgba(255,255,255,0.3)}
+.main{max-width:1100px;margin:15px auto;display:flex;gap:15px;padding:0 10px}
+.left{width:280px}
 .center{flex:1}
-.stories{background:white;border-radius:10px;padding:15px;display:flex;gap:12px;overflow-x:auto;margin-bottom:15px}
-.s{ text-align:center; min-width:60px }
-.s img{width:60px;height:60px;border-radius:50%;border:3px solid #1877f2}
-.create-post{background:white;border-radius:10px;padding:15px;margin-bottom:15px}
-.create-post input{width:100%;background:#f0f2f5;border:none;padding:12px;border-radius:20px;margin-top:10px}
-.post{background:white;border-radius:10px;padding:15px;margin-bottom:15px}
-.post-h{display:flex;gap:10px;align-items:center}
-.post-h img{width:40px;height:40px;border-radius:50%}
-.post-img{width:100%;border-radius:10px;margin:10px 0;max-height:350px;object-fit:cover}
-.actions{display:flex;justify-content:space-around;border-top:1px solid #ddd;padding-top:10px;margin-top:10px}
-.actions button{border:none;padding:8px 15px;border-radius:6px;cursor:pointer;background:#e4e6eb}
-.btn-love{background:#c1272d!important;color:white}
-.right{width:250px;background:white;border-radius:10px;padding:15px;height:fit-content;position:sticky;top:80px}
-.contact{display:flex;align-items:center;gap:10px;padding:8px 0}
-.contact img{width:32px;height:32px;border-radius:50%}
-.online{width:8px;height:8px;background:green;border-radius:50%;display:inline-block}
-.chat-popup{position:fixed;bottom:0;right:20px;width:320px;background:white;border-radius:10px 10px 0 0;box-shadow:0 0 10px rgba(0,0,0,0.3);display:none;flex-direction:column;height:400px}
-.chat-h{background:#1877f2;color:white;padding:10px;display:flex;justify-content:space-between}
-.chat-m{flex:1;padding:10px;overflow-y:auto;background:#f0f2f5}
-.msg{padding:8px 12px;border-radius:18px;margin:5px 0;max-width:70%}
-.me{background:#0084ff;color:white;margin-left:auto}
-.other{background:white}
-.chat-i{display:flex;padding:10px;gap:5px}
-.chat-i input{flex:1;border:none;background:#f0f2f5;border-radius:20px;padding:8px 12px}
+.card{background:white;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 2px 10px rgba(0,0,0,0.05);border:1px solid #ffe6e6}
+.btn-pink{background:#c1272d;color:white;border:none;padding:10px;border-radius:25px;font-weight:bold;cursor:pointer;width:100%;margin-top:8px}
+.btn-white{background:white;color:#c1272d;border:2px solid #c1272d;padding:8px;border-radius:25px;font-weight:bold;cursor:pointer;width:100%;margin-top:8px}
 .login-modal{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:1000}
-.login-box{background:white;padding:25px;border-radius:10px;width:360px;text-align:center}
-.login-box input{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:6px}
-.login-box button{width:100%;padding:12px;background:#1877f2;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;margin-top:10px}
-@media(max-width:900px){.left,.right{display:none}.search{width:150px}}
+.login-box{background:white;padding:22px;border-radius:20px;width:360px;text-align:center}
+.login-box input,.login-box select{width:100%;padding:11px;margin:5px 0;border:2px solid #ffe6e6;border-radius:10px}
+.tab2{display:flex;gap:6px;margin-bottom:10px;background:#fff0f0;padding:4px;border-radius:10px}
+.tab2 button{flex:1;padding:8px;border:none;border-radius:8px;cursor:pointer;font-weight:bold;background:transparent}
+.tab2 button.active2{background:#c1272d;color:white}
+.hidden{display:none}
+.fb-friend{display:flex;align-items:center;gap:12px;padding:12px 14px;background:white;border-radius:12px;margin-bottom:8px;border:1px solid #ffe6e6;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.fb-friend img.avatar{width:70px;height:70px;border-radius:50%;object-fit:cover;cursor:pointer;border:1px solid #ffe6e6}
+.fb-friend-info{flex:1}
+.fb-friend-info b{font-size:16px;display:block;color:#333}
+.fb-mutual{color:gray;font-size:13px;display:flex;align-items:center;gap:4px;margin:3px 0}
+.fb-mutual.stack{display:flex;margin-right:4px}
+.fb-mutual.stack img{width:20px;height:20px;border-radius:50%;border:2px solid white;margin-left:-6px}
+.fb-mutual.stack img:first-child{margin-left:0}
+.fb-actions{display:flex;gap:8px;margin-top:7px}
+.btn-add{background:#1877f2;color:white;border:none;padding:8px 0;width:135px;border-radius:8px;font-weight:bold;cursor:pointer}
+.btn-remove{background:#e4e6eb;color:#050505;border:none;padding:8px 0;width:105px;border-radius:8px;font-weight:bold;cursor:pointer}
+.btn-following{background:#e4e6eb;color:#050505;border:none;padding:8px 0;width:135px;border-radius:8px;font-weight:bold;cursor:pointer}
+.btn-msg{background:#c1272d;color:white;border:none;padding:8px 12px;border-radius:8px;font-weight:bold;cursor:pointer}
+.chat-modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:flex-end;justify-content:center;z-index:2000}
+.chat-box{background:white;width:100%;max-width:380px;height:75vh;border-radius:18px 18px 0 0;display:flex;flex-direction:column}
+.chat-head{background:#c1272d;color:white;padding:12px;border-radius:18px 18px 0 0;display:flex;justify-content:space-between}
+.chat-msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:6px;background:#fff8f8}
+.m{padding:9px 12px;border-radius:16px;max-width:75%;font-size:14px}
+.m.me{background:#c1272d;color:white;align-self:flex-end}
+.m.other{background:white;border:1px solid #ffe6e6;align-self:flex-start}
+.chat-in{display:flex;gap:6px;padding:10px;border-top:1px solid #eee}
+.chat-in input{flex:1;padding:10px;border:2px solid #ffe6e6;border-radius:20px}
+.fb-profile-cover{height:240px;background:linear-gradient(180deg,#c1272d,#ff8fa3);position:relative;border-radius:0 0 16px 16px;overflow:hidden}
+.fb-profile-cover img{width:100%;height:100%;object-fit:cover}
+.fb-profile-avatar{width:140px;height:140px;border-radius:50%;border:5px solid white;position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);object-fit:cover;background:white;cursor:pointer}
+.fb-cam{position:absolute;width:36px;height:36px;background:#e4e6eb;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid white;box-shadow:0 2px 5px rgba(0,0,0,0.2)}
+.fb-cam.cover{bottom:15px;right:15px}
+.fb-cam.avatar{bottom:-40px;left:58%;width:32px;height:32px}
+.fb-profile-info{background:white;padding:75px 16px 16px;border-radius:16px;margin-top:-15px;text-align:center;border:1px solid #ffe6e6}
+.fb-profile-info h2{font-size:24px;font-weight:bold;color:#050505}
+.fb-profile-stats{display:flex;justify-content:center;gap:20px;margin:10px 0;font-size:14px;color:#65676b}
+.fb-profile-stats b{color:#050505}
+.fb-profile-actions{display:flex;gap:8px;justify-content:center;margin:12px 0}
+.fb-tabs{display:flex;background:white;margin-top:10px;border-radius:12px;padding:4px;border:1px solid #ffe6e6}
+.fb-tabs button{flex:1;padding:10px;border:none;background:transparent;font-weight:bold;border-radius:8px;cursor:pointer;color:#65676b}
+.fb-tabs button.active{background:#e7f3ff;color:#1877f2}
+.fb-about{background:white;border-radius:12px;padding:16px;margin-top:10px;border:1px solid #ffe6e6}
+.fb-about-item{display:flex;align-items:center;gap:12px;padding:8px 0;color:#050505}
+.fb-about-item i{width:20px;color:#65676b}
+.fb-friends-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.fb-friends-grid div{text-align:center;cursor:pointer}
+.fb-friends-grid img{width:100%;aspect-ratio:1;border-radius:12px;object-fit:cover}
+.fb-edit-modal{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:3000}
+.fb-edit-box{background:white;width:90%;max-width:400px;border-radius:16px;padding:20px}
 </style>
 </head>
 <body>
-
 <div class="header">
-  <div class="logo">❤️ Malawi Love</div>
-  <input class="search" placeholder="🔍 Search Malawi Love">
-  <div onclick="toggleChat()">💬 🔔 👤</div>
+<div class="logo">❤️ Malawi Love</div>
+<div class="nav">
+<i id="nH" class="fas fa-home" onclick="showS('home')"></i>
+<i id="nF" class="fas fa-heart active" onclick="showS('friends')"></i>
+<i id="nI" class="fas fa-comment" onclick="showS('inbox')"></i>
+<i id="nP" class="fas fa-user" onclick="openMy()"></i>
+</div>
+<img id="topA" src="https://i.pravatar.cc/100?img=15" style="width:35px;height:35px;border-radius:50%;border:2px solid white" onclick="openMy()">
 </div>
 
-<!-- LOGIN -->
-<div class="login-modal" id="loginModal">
-  <div class="login-box">
-    <h2 style="color:#c1272d">❤️ Malawi Love</h2>
-    <p>Facebook ya Chibwezi ku Malawi</p>
-    <input type="text" id="regName" placeholder="Dzina lanu - Mwachitsanzo Pati">
-    <input type="email" id="regEmail" placeholder="Email">
-    <input type="password" id="regPass" placeholder="Password">
-    <button onclick="register()">Lowani / Pangani Account</button>
-    <p style="margin-top:10px;font-size:12px;color:gray">Mukalowa mudzaoneka ngati Facebook</p>
-  </div>
+<div class="login-modal" id="loginM">
+<div class="login-box">
+<h2 style="color:#c1272d">❤️ Malawi Love</h2>
+<div class="tab2"><button id="tL" class="active2" onclick="showL()">Login</button><button id="tC" onclick="showC()">Create</button></div>
+<div id="fL"><input id="lP" placeholder="Phone"><input id="lPass" type="password" placeholder="Password"><button class="btn-pink" onclick="login()">Login</button><p id="loginErr" style="color:red;font-size:12px;margin-top:6px"></p></div>
+<div id="fC" class="hidden"><input id="rN" placeholder="Full Name"><input id="rP" placeholder="Phone"><select id="rG"><option value="">Gender</option><option>Male</option><option>Female</option></select><select id="rCity"><option>Lilongwe</option><option>Blantyre</option><option>Mzuzu</option><option>Zomba</option><option>Kasungu</option></select><input id="rPass" type="password" placeholder="Password"><button class="btn-pink" onclick="createA()">Create</button><p id="st" style="color:red;font-size:11px"></p></div>
+</div>
 </div>
 
 <div class="main">
-  <div class="left">
-    <p id="userDisplay">👤 Pati</p>
-    <p>👥 Friends</p>
-    <p>👥 Groups</p>
-    <p class="active-dating">❤️ Dating - Discover</p>
-    <p>🕘 Memories</p>
-    <p>🔖 Saved</p>
-    <p>📅 Events</p>
-    <p>📄 Pages</p>
-    <hr style="margin:10px 0">
-    <p style="color:#c1272d"><b>Anthu Oyandikira:</b><br>Lilongwe • Blantyre • Mzuzu</p>
-  </div>
+<div class="left">
+<div class="card" style="text-align:center">
+<div style="position:relative;display:inline-block">
+<img id="leftA" src="https://i.pravatar.cc/100?img=15" style="width:75px;height:75px;border-radius:50%;border:3px solid #c1272d;cursor:pointer" onclick="document.getElementById('leftUpload').click()">
+<div style="position:absolute;bottom:0;right:0;background:#1877f2;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:12px;border:2px solid white;cursor:pointer" onclick="document.getElementById('leftUpload').click()"><i class="fas fa-camera"></i></div>
+</div>
+<input type="file" id="leftUpload" accept="image/*" style="display:none" onchange="uploadAvatar(this, true)">
+<h3 id="leftN">Guest</h3><small id="leftC" style="color:gray"></small><div style="display:flex;justify-content:center;gap:15px;margin:8px 0;font-size:13px"><span><b id="lf1">0</b> Following</span><span><b id="lf2">0</b> Followers</span></div><button class="btn-pink" onclick="openMy()">Profile</button><button class="btn-white" onclick="logout()">Logout</button></div>
+<div class="card"><h4>Chats</h4><div id="recent"></div></div>
+</div>
+<div class="center">
+<div id="homeS" style="display:none"><div id="feed"></div></div>
+<div id="friendsS"><div class="card" style="background:#c1272d;color:white"><h3>Discover</h3><p id="tot"></p></div><div id="grid"></div></div>
+<div id="inboxS" style="display:none"><div class="card"><h3>Inbox</h3><div id="inbox"></div></div></div>
 
-  <div class="center">
-    <div class="stories">
-      <div class="s"><img src="https://i.pravatar.cc/100?img=5"><br>Chisomo</div>
-      <div class="s"><img src="https://i.pravatar.cc/100?img=6"><br>Thoko</div>
-      <div class="s"><img src="https://i.pravatar.cc/100?img=8"><br>Gift</div>
-      <div class="s"><img src="https://i.pravatar.cc/100?img=9"><br>Aisha</div>
-      <div class="s"><img src="https://i.pravatar.cc/100?img=10"><br>Kelvin</div>
-      <div class="s"><img src="https://i.pravatar.cc/100?img=12"><br>Emmanuel</div>
-    </div>
+<div id="profS" style="display:none">
+<div class="fb-profile-cover">
+<img id="coverImg" src="https://picsum.photos/800/300?random=1">
+<div class="fb-cam cover" id="coverCam" style="display:none" onclick="document.getElementById('coverUpload').click()"><i class="fas fa-camera"></i></div>
+<img id="profA" class="fb-profile-avatar" onclick="if(view && view.id==cur.id) document.getElementById('avatarUpload').click()">
+<div class="fb-cam avatar" id="avatarCam" style="display:none" onclick="document.getElementById('avatarUpload').click()"><i class="fas fa-camera"></i></div>
+</div>
+<input type="file" id="coverUpload" accept="image/*" style="display:none" onchange="uploadCover(this)">
+<input type="file" id="avatarUpload" accept="image/*" style="display:none" onchange="uploadAvatar(this, false)">
 
-    <div class="create-post">
-      <div style="display:flex;gap:10px;align-items:center">
-        <img src="https://i.pravatar.cc/100?img=15" style="width:40px;border-radius:50%">
-        <input type="text" id="newPostText" placeholder="Pati, mukuganiza chiyani? Mukufuna chibwezi chotani?">
-      </div>
-      <button onclick="createPost()" style="margin-top:10px;background:#c1272d;color:white;border:none;padding:8px 15px;border-radius:6px;float:right">Post</button>
-      <div style="clear:both"></div>
-    </div>
-
-    <div id="feed">
-      <div class="post">
-        <div class="post-h">
-          <img src="https://i.pravatar.cc/100?img=32">
-          <div><b>Chimwemwe, 24 • Lilongwe</b><br><small>2h • Public • 2km away</small></div>
-        </div>
-        <p style="margin:10px 0">Looking for genuine connection ❤️ Ndili ku Area 47, ndimakonda coffee ndi ma walk ku Bwaila. Ticheze?</p>
-        <img class="post-img" src="https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600">
-        <p>❤️ 24 👍 12 • 3 comments</p>
-        <div class="actions">
-          <button onclick="like(this)">👍 Like</button>
-          <button onclick="toggleChat()">💬 Comment</button>
-          <button>↗️ Share</button>
-          <button class="btn-love" onclick="superLike('Chimwemwe')">❤️ Super Like = Match</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="right">
-    <b>Contacts • Online</b>
-    <div class="contact" onclick="openChat('Chisomo')"><img src="https://i.pravatar.cc/100?img=5"><span>Chisomo</span><span class="online"></span></div>
-    <div class="contact" onclick="openChat('Thoko')"><img src="https://i.pravatar.cc/100?img=6"><span>Thoko</span><span class="online"></span></div>
-    <div class="contact" onclick="openChat('Aisha')"><img src="https://i.pravatar.cc/100?img=9"><span>Aisha</span><span class="online"></span></div>
-    <div class="contact" onclick="openChat('Gift')"><img src="https://i.pravatar.cc/100?img=8"><span>Gift</span><span class="online"></span></div>
-  </div>
+<div class="fb-profile-info">
+<h2 id="profN"></h2>
+<p id="profBioShort" style="color:#050505;margin:6px 0"></p>
+<div class="fb-profile-stats"><span><b id="pf1">0</b> Following</span><span><b id="pf2">0</b> Followers</span><span><b id="pfFriends">0</b> Friends</span></div>
+<p id="profB" style="background:#f0f2f5;padding:10px;border-radius:10px;margin:10px 0;text-align:left"></p>
+<div class="fb-profile-actions">
+<button id="profBtn" class="btn-add" style="width:140px" onclick="tog()"></button>
+<button id="profMsg" class="btn-msg" style="width:140px" onclick="openChatP()"><i class="fas fa-comment"></i> Message</button>
+<button id="profEdit" class="btn-remove" style="display:none;width:140px" onclick="openEdit()"><i class="fas fa-pen"></i> Edit</button>
+</div>
+</div>
+<div class="fb-tabs">
+<button id="ptAbout" class="active" onclick="showPTab('about')">About</button>
+<button id="ptFriends" onclick="showPTab('friends')">Friends</button>
+<button id="ptPhotos" onclick="showPTab('photos')">Photos</button>
+</div>
+<div id="pAbout" class="fb-about">
+<div class="fb-about-item"><i class="fas fa-briefcase"></i><span>Works at Malawi Love</span></div>
+<div class="fb-about-item"><i class="fas fa-home"></i><span id="abCity"></span></div>
+<div class="fb-about-item"><i class="fas fa-venus-mars"></i><span id="abGender"></span></div>
+<div class="fb-about-item"><i class="fas fa-phone"></i><span id="abPhone"></span></div>
+</div>
+<div id="pFriends" class="fb-about" style="display:none"><h3>Friends <span id="friendsCount"></span></h3><div id="profileFriendsGrid" class="fb-friends-grid"></div></div>
+<div id="pPhotos" class="fb-about" style="display:none"><h3>Photos</h3><div id="photosGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:10px"></div></div>
 </div>
 
-<!-- CHAT POPUP -->
-<div class="chat-popup" id="chatPopup">
-  <div class="chat-h"><span id="chatName">Chisomo • Active now</span><span onclick="toggleChat()" style="cursor:pointer">✕</span></div>
-  <div class="chat-m" id="chatMessages">
-    <div class="msg other">Hi Pati! 😊</div>
-    <div class="msg other">Muli bwanji?</div>
-  </div>
-  <div class="chat-i">
-    <input type="text" id="chatInput" placeholder="Aa Message..." onkeypress="if(event.key==='Enter')sendMsg()">
-    <button onclick="sendMsg()" style="background:#0084ff;color:white;border:none;border-radius:50%;width:32px;height:32px">➤</button>
-  </div>
+</div>
+</div>
+
+<div class="chat-modal" id="chatM">
+<div class="chat-box">
+<div class="chat-head"><span><img id="chatA" src="" style="width:28px;height:28px;border-radius:50%;vertical-align:middle"> <b id="chatN"></b></span><span onclick="closeChat()" style="cursor:pointer">✕</span></div>
+<div class="chat-msgs" id="chatBox"></div>
+<div class="chat-in"><input id="chatI" placeholder="Aa" onkeypress="if(event.key==='Enter')sendM()"><button onclick="sendM()" style="background:#c1272d;color:white;border:none;width:40px;height:40px;border-radius:50%">➤</button></div>
+</div>
+</div>
+
+<div class="fb-edit-modal" id="editM">
+<div class="fb-edit-box">
+<h3>Edit Profile</h3>
+<div style="text-align:center;margin-bottom:10px">
+<img id="editPreview" src="" style="width:80px;height:80px;border-radius:50%;border:3px solid #c1272d">
+<br><button class="btn-white" style="width:auto;padding:6px 12px;font-size:12px;margin-top:6px" onclick="document.getElementById('avatarUpload').click()">Change Photo</button>
+</div>
+<input id="eName" placeholder="Name" style="width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:8px">
+<input id="eBio" placeholder="Bio" style="width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:8px">
+<input id="eCity" placeholder="City" style="width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:8px">
+<div style="display:flex;gap:8px;margin-top:10px"><button class="btn-pink" style="flex:1" onclick="saveEdit()">Save</button><button class="btn-white" style="flex:1" onclick="closeEdit()">Cancel</button></div>
+</div>
 </div>
 
 <script>
-// FULL LOGIC
-let currentUser = "Pati";
-function register(){
-  let name = document.getElementById('regName').value;
-  let email = document.getElementById('regEmail').value;
-  if(name) currentUser = name;
-  document.getElementById('userDisplay').textContent = "👤 " + currentUser;
-  document.getElementById('loginModal').style.display = "none";
-  // Apa ndipamene Firebase code idzalumikizidwa
-  alert("Takulandirani " + currentUser + " ku Malawi Love! ❤️ Tsopano muli ngati pa Facebook.");
+var supabaseUrl = "https://kjsvpnhlckwkizzfzyvx.supabase.co";
+var supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtqc3ZwbmhsY2t3a2l6emZ6eXZ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkyMzQwODgsImV4cCI6MjEwNDgxMDA4OH0.5A0u1zQUargDPZ5Suy8n0dJRrS1C0RKWmTwjPgkn_Yc";
+var client = window.supabase.createClient(supabaseUrl, supabaseKey);
+var cur = JSON.parse(localStorage.getItem('currentUser')||'null');
+var view = null, chatWith = null, cache = [];
+
+function showL(){document.getElementById('fL').classList.remove('hidden');document.getElementById('fC').classList.add('hidden');document.getElementById('tL').classList.add('active2');document.getElementById('tC').classList.remove('active2');}
+function showC(){document.getElementById('fC').classList.remove('hidden');document.getElementById('fL').classList.add('hidden');document.getElementById('tC').classList.add('active2');document.getElementById('tL').classList.remove('active2');}
+
+async function createA(){
+var n=document.getElementById('rN').value.trim(),p=document.getElementById('rP').value.trim(),g=document.getElementById('rG').value,c=document.getElementById('rCity').value,pa=document.getElementById('rPass').value;
+if(!n||!p||!pa){document.getElementById('st').textContent="Fill all";return;}
+document.getElementById('st').textContent="Creating...";
+try{
+var av="https://i.pravatar.cc/300?img="+(Math.floor(Math.random()*70)+1);
+var res=await client.from('Love Seek').insert([{name:n,phone:p,gender:g||'Male',city:c,pass:pa,avatar:av,cover:'https://picsum.photos/800/300?random='+Math.floor(Math.random()*100),bio:(g||'Person')+" from "+c,friends:'[]'}]).select();
+if(res.error) throw res.error;
+cur=res.data[0];localStorage.setItem('currentUser',JSON.stringify(cur));init();
+}catch(e){document.getElementById('st').textContent=e.message;}
+}
+async function login(){
+var p=document.getElementById('lP').value.trim(),pa=document.getElementById('lPass').value.trim();
+if(!p||!pa){document.getElementById('loginErr').textContent="Enter phone";return;}
+document.getElementById('loginErr').textContent="Logging...";
+try{
+var res=await client.from('Love Seek').select('*').eq('phone',p).eq('pass',pa);
+if(res.error) throw res.error;
+if(!res.data||res.data.length==0){document.getElementById('loginErr').textContent="Wrong";return;}
+cur=res.data[0];localStorage.setItem('currentUser',JSON.stringify(cur));init();
+}catch(e){document.getElementById('loginErr').textContent=e.message;}
+}
+async function init(){
+if(!cur) return;
+document.getElementById('loginM').style.display='none';
+document.getElementById('leftN').textContent=cur.name;document.getElementById('leftC').textContent=cur.city;document.getElementById('leftA').src=cur.avatar;document.getElementById('topA').src=cur.avatar;
+document.getElementById('feed').innerHTML='<div class="card">Welcome '+cur.name+'! ❤️</div>';
+updateF();render();loadInbox();
+client.channel('chat-'+cur.id).on('postgres_changes',{event:'INSERT',schema:'public',table:'Messages',filter:'receiver_id=eq.'+cur.id},function(pl){
+if(chatWith && pl.new.sender_id==chatWith.id){addMsg(pl.new.message,false);}
+loadInbox();
+}).subscribe();
+}
+async function updateF(){
+var f1=0;try{f1=JSON.parse(cur.friends||'[]').length;}catch{}document.getElementById('lf1').textContent=f1;
+var res=await client.from('Love Seek').select('friends');
+var cnt=0;if(res.data) res.data.forEach(function(u){try{if(JSON.parse(u.friends||'[]').includes(cur.id)) cnt++;}catch{}});
+document.getElementById('lf2').textContent=cnt;
+}
+function getMutual(user){
+try{
+var myFriends=JSON.parse(cur.friends||'[]');
+var theirFriends=JSON.parse(user.friends||'[]');
+var mutual=myFriends.filter(function(id){return theirFriends.includes(id)}).length;
+if(mutual==0) mutual=Math.floor(Math.random()*4)+1;
+if(mutual>18) mutual=18;
+return mutual;
+}catch{return 1}
+}
+async function render(){
+var res=await client.from('Love Seek').select('*').neq('id',cur.id).order('id',{ascending:false});
+if(!res.data) return;cache=res.data;
+document.getElementById('tot').textContent=res.data.length+" people";
+document.getElementById('grid').innerHTML=res.data.map(function(u){
+var isF=false;try{isF=JSON.parse(cur.friends||'[]').includes(u.id);}catch{}
+var mutual=getMutual(u);
+return '<div class="fb-friend"><img class="avatar" src="'+u.avatar+'" onclick="openP('+u.id+')"><div class="fb-friend-info"><b>'+u.name+'</b><div class="fb-mutual"><div class="stack"><img src="https://i.pravatar.cc/100?img=8"><img src="https://i.pravatar.cc/100?img=9"></div> '+mutual+' mutual • '+u.city+'</div><div class="fb-actions"><button class="'+(isF?'btn-following':'btn-add')+'" onclick="togId('+u.id+')">'+(isF?'Following':'Follow')+'</button><button class="btn-msg" onclick="openC('+u.id+')">Message</button></div></div></div>';
+}).join('');
+}
+async function openP(id){
+var u=id==cur.id?cur:cache.find(function(x){return x.id==id});
+if(!u){var r=await client.from('Love Seek').select('*').eq('id',id).single();u=r.data;}
+view=u;
+document.getElementById('homeS').style.display='none';document.getElementById('friendsS').style.display='none';document.getElementById('inboxS').style.display='none';document.getElementById('profS').style.display='block';
+document.getElementById('profA').src=u.avatar;
+document.getElementById('coverImg').src=u.cover||'https://picsum.photos/800/300?random=1';
+document.getElementById('profN').textContent=u.name;document.getElementById('profBioShort').textContent=u.gender+' • '+u.city;document.getElementById('profB').textContent=u.bio;
+document.getElementById('abCity').textContent='Lives in '+u.city;document.getElementById('abGender').textContent=u.gender;document.getElementById('abPhone').textContent=u.phone;
+var f=0;try{f=JSON.parse(u.friends||'[]').length;}catch{}document.getElementById('pf1').textContent=f;
+var res=await client.from('Love Seek').select('friends');var c=0;if(res.data) res.data.forEach(function(x){try{if(JSON.parse(x.friends||'[]').includes(u.id)) c++;}catch{}});document.getElementById('pf2').textContent=c;
+var isF=false;try{isF=JSON.parse(cur.friends||'[]').includes(u.id);}catch{}
+document.getElementById('profBtn').textContent=isF?'Following':'Follow';
+document.getElementById('profEdit').style.display=u.id==cur.id?'block':'none';
+document.getElementById('profBtn').style.display=u.id==cur.id?'none':'block';
+document.getElementById('profMsg').style.display=u.id==cur.id?'none':'block';
+document.getElementById('coverCam').style.display=u.id==cur.id?'flex':'none';
+document.getElementById('avatarCam').style.display=u.id==cur.id?'flex':'none';
+showPTab('about');loadProfileFriends();loadPhotos();
+}
+function openMy(){openP(cur.id);}
+async function togId(id){
+var fr=[];try{fr=JSON.parse(cur.friends||'[]');}catch{}
+if(fr.includes(id)) fr=fr.filter(function(x){return x!=id});else fr.push(id);
+var res=await client.from('Love Seek').update({friends:JSON.stringify(fr)}).eq('id',cur.id);
+if(res.error){alert(res.error.message);return;}
+cur.friends=JSON.stringify(fr);localStorage.setItem('currentUser',JSON.stringify(cur));
+updateF();render();if(view&&view.id==id) openP(id);
+}
+function tog(){if(view) togId(view.id);}
+function showS(s){
+document.getElementById('homeS').style.display=s=='home'?'block':'none';
+document.getElementById('friendsS').style.display=s=='friends'?'block':'none';
+document.getElementById('inboxS').style.display=s=='inbox'?'block':'none';
+document.getElementById('profS').style.display='none';
+document.getElementById('nH').classList.toggle('active',s=='home');
+document.getElementById('nF').classList.toggle('active',s=='friends');
+document.getElementById('nI').classList.toggle('active',s=='inbox');
+}
+function openC(id){
+var u=cache.find(function(x){return x.id==id})||view;
+if(!u) return;
+var isF=false;try{isF=JSON.parse(cur.friends||'[]').includes(u.id);}catch{}
+if(!isF){togId(u.id);}
+chatWith=u;document.getElementById('chatA').src=u.avatar;document.getElementById('chatN').textContent=u.name;document.getElementById('chatM').style.display='flex';document.getElementById('chatBox').innerHTML='';loadMsgs();
+}
+function openChatP(){if(view){openC(view.id);}}
+function closeChat(){document.getElementById('chatM').style.display='none';chatWith=null;}
+async function loadMsgs(){
+if(!chatWith)return;
+try{
+var res=await client.from('Messages').select('*').or('and(sender_id.eq.'+cur.id+',receiver_id.eq.'+chatWith.id+'),and(sender_id.eq.'+chatWith.id+',receiver_id.eq.'+cur.id+')').order('created_at',{ascending:true});
+document.getElementById('chatBox').innerHTML='';if(!res.data||res.data.length==0){document.getElementById('chatBox').innerHTML="<small style='color:gray'>Say Hi! 👋</small>";return;}
+res.data.forEach(function(m){addMsg(m.message,m.sender_id==cur.id);});
+}catch(e){document.getElementById('chatBox').innerHTML="<small>Say Hi! 👋</small>";}
+}
+function addMsg(txt,isMe){var d=document.createElement('div');d.className='m '+(isMe?'me':'other');d.textContent=txt;document.getElementById('chatBox').appendChild(d);document.getElementById('chatBox').scrollTop=document.getElementById('chatBox').scrollHeight;}
+async function sendM(){
+var t=document.getElementById('chatI').value.trim();if(!t||!chatWith)return;document.getElementById('chatI').value='';addMsg(t,true);
+try{await client.from('Messages').insert([{sender_id:cur.id,receiver_id:chatWith.id,message:t}]);}catch(e){alert(e.message);}
+loadInbox();
+}
+async function loadInbox(){
+try{
+var myFr=[];try{myFr=JSON.parse(cur.friends||'[]');}catch{}
+var res=await client.from('Messages').select('*').or('sender_id.eq.'+cur.id+',receiver_id.eq.'+cur.id).order('created_at',{ascending:false}).limit(50);
+if(res.data&&res.data.length>0){
+var uniq={};res.data.forEach(function(m){var o=m.sender_id==cur.id?m.receiver_id:m.sender_id;if(!myFr.includes(o)) return;if(!uniq[o])uniq[o]=m;});
+var html=Object.entries(uniq).map(function(entry){var oid=entry[0],last=entry[1];var u=cache.find(function(x){return x.id==oid});if(!u)return'';return '<div class="fb-friend" onclick="openC('+u.id+')"><img class="avatar" src="'+u.avatar+'"><div class="fb-friend-info"><b>'+u.name+'</b><div class="fb-mutual">'+last.message.substring(0,25)+'</div></div></div>'}).join('');
+if(html){document.getElementById('inbox').innerHTML=html;document.getElementById('recent').innerHTML=html;return;}}
+}catch(e){}
+document.getElementById('inbox').innerHTML="";document.getElementById('recent').innerHTML="";
+}
+function showPTab(t){
+document.getElementById('pAbout').style.display=t=='about'?'block':'none';
+document.getElementById('pFriends').style.display=t=='friends'?'block':'none';
+document.getElementById('pPhotos').style.display=t=='photos'?'block':'none';
+document.getElementById('ptAbout').classList.toggle('active',t=='about');
+document.getElementById('ptFriends').classList.toggle('active',t=='friends');
+document.getElementById('ptPhotos').classList.toggle('active',t=='photos');
+if(t=='friends') loadProfileFriends();
+if(t=='photos') loadPhotos();
+}
+async function loadProfileFriends(){
+if(!view) return;
+var fr=[];try{fr=JSON.parse(view.friends||'[]');}catch{}
+var res=await client.from('Love Seek').select('*');
+if(!res.data) return;
+var friends=res.data.filter(function(u){return fr.includes(u.id)}).slice(0,9);
+document.getElementById('friendsCount').textContent='('+friends.length+')';
+document.getElementById('pfFriends').textContent=friends.length;
+document.getElementById('profileFriendsGrid').innerHTML=friends.map(function(u){
+return '<div onclick="openP('+u.id+')"><img src="'+u.avatar+'"><div style="font-size:12px;margin-top:4px">'+u.name.split(' ')[0]+'</div></div>';
+}).join('') || '<small>No friends yet</small>';
+}
+function loadPhotos(){
+if(!view) return;
+var grid=document.getElementById('photosGrid');
+grid.innerHTML='<img src="'+view.avatar+'" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px"><img src="'+(view.cover||'https://picsum.photos/400')+'" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px">';
+}
+function openEdit(){
+if(!view||view.id!=cur.id) return;
+document.getElementById('eName').value=view.name;
+document.getElementById('eBio').value=view.bio;
+document.getElementById('eCity').value=view.city;
+document.getElementById('editPreview').src=view.avatar;
+document.getElementById('editM').style.display='flex';
+}
+function closeEdit(){document.getElementById('editM').style.display='none';}
+async function saveEdit(){
+var n=document.getElementById('eName').value.trim();
+var b=document.getElementById('eBio').value.trim();
+var c=document.getElementById('eCity').value.trim();
+if(!n) return;
+var res=await client.from('Love Seek').update({name:n,bio:b,city:c}).eq('id',cur.id).select();
+if(res.error){alert(res.error.message);return;}
+cur=res.data[0];localStorage.setItem('currentUser',JSON.stringify(cur));view=cur;closeEdit();openP(cur.id);updateF();
 }
 
-function createPost(){
-  let text = document.getElementById('newPostText').value;
-  if(!text) return;
-  let feed = document.getElementById('feed');
-  let div = document.createElement('div');
-  div.className = 'post';
-  div.innerHTML = `<div class="post-h"><img src="https://i.pravatar.cc/100?img=15"><div><b>${currentUser}</b><br><small>Just now • Public</small></div></div><p style="margin:10px 0">${text}</p><div class="actions"><button onclick="like(this)">👍 Like</button><button>💬 Comment</button><button>↗️ Share</button><button class="btn-love">❤️ Like</button></div>`;
-  feed.prepend(div);
-  document.getElementById('newPostText').value = "";
+// UPLOAD PROFILE PICTURE - FACEBOOK DESIGN
+async function uploadAvatar(input, isLeft){
+var file=input.files[0];if(!file) return;
+if(file.size>5*1024*1024){alert("Chithunzi chachikulu kwambiri! Max 5MB");return;}
+var reader=new FileReader();
+reader.onload=function(e){
+var base64=e.target.result;
+document.getElementById('profA').src=base64;
+if(isLeft) document.getElementById('leftA').src=base64;
+document.getElementById('topA').src=base64;
+document.getElementById('editPreview').src=base64;
+};
+reader.readAsDataURL(file);
+
+// Upload to Supabase Storage
+try{
+var fileName=cur.id+'_avatar_'+Date.now()+'.jpg';
+var upload=await client.storage.from('avatars').upload(fileName, file);
+if(upload.error){
+// Ngati bucket palibe, pangani mu SQL: Storage > Create bucket avatars public
+// Kenako gwiritsani base64 ngati fallback
+var res=await client.from('Love Seek').update({avatar: reader.result || cur.avatar}).eq('id',cur.id).select();
+}else{
+var url=client.storage.from('avatars').getPublicUrl(fileName).data.publicUrl;
+var res=await client.from('Love Seek').update({avatar:url}).eq('id',cur.id).select();
+}
+if(res && res.data){
+cur=res.data[0];localStorage.setItem('currentUser',JSON.stringify(cur));
+document.getElementById('leftA').src=cur.avatar;
+document.getElementById('topA').src=cur.avatar;
+}
+}catch(err){
+console.log(err);
+// Fallback: sungani ngati base64 URL kwakanthawi
+try{
+var res2=await client.from('Love Seek').update({avatar: document.getElementById('profA').src}).eq('id',cur.id).select();
+if(res2.data){cur=res2.data[0];localStorage.setItem('currentUser',JSON.stringify(cur));}
+}catch(e){}
+}
 }
 
-function like(btn){ btn.textContent = "❤️ Liked"; btn.style.color = "#c1272d"; }
-
-function superLike(name){
-  alert("❤️ MATCH! Inu ndi " + name + " mwakondana! Pitani ku Chat mukacheze.");
-  openChat(name);
+async function uploadCover(input){
+var file=input.files[0];if(!file) return;
+var reader=new FileReader();
+reader.onload=function(e){document.getElementById('coverImg').src=e.target.result;};
+reader.readAsDataURL(file);
+try{
+var fileName=cur.id+'_cover_'+Date.now()+'.jpg';
+var upload=await client.storage.from('avatars').upload(fileName, file);
+if(!upload.error){
+var url=client.storage.from('avatars').getPublicUrl(fileName).data.publicUrl;
+var res=await client.from('Love Seek').update({cover:url}).eq('id',cur.id).select();
+if(res.data){cur=res.data[0];localStorage.setItem('currentUser',JSON.stringify(cur));}
+}else{
+var res=await client.from('Love Seek').update({cover: document.getElementById('coverImg').src}).eq('id',cur.id).select();
+if(res.data){cur=res.data[0];localStorage.setItem('currentUser',JSON.stringify(cur));}
+}
+}catch(err){}
 }
 
-function toggleChat(){
-  let p = document.getElementById('chatPopup');
-  p.style.display = p.style.display === 'flex' ? 'none' : 'flex';
-}
-
-function openChat(name){
-  document.getElementById('chatName').textContent = name + " • Active now";
-  document.getElementById('chatPopup').style.display = 'flex';
-}
-
-function sendMsg(){
-  let input = document.getElementById('chatInput');
-  if(!input.value.trim()) return;
-  let box = document.getElementById('chatMessages');
-  let d = document.createElement('div');
-  d.className = 'msg me';
-  d.textContent = input.value;
-  box.appendChild(d);
-  input.value = "";
-  box.scrollTop = box.scrollHeight;
-  // Reply yongopeka
-  setTimeout(()=>{
-    let r = document.createElement('div');
-    r.className = 'msg other';
-    r.textContent = "Zabwino kwambiri Pati! 😊 Ticheze mawa?";
-    box.appendChild(r);
-    box.scrollTop = box.scrollHeight;
-  }, 1000);
-}
+function logout(){localStorage.removeItem('currentUser');location.reload();}
+if(cur) init();
 </script>
 </body>
-  </html>
+</html>

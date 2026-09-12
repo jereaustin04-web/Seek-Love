@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Malawi Love - Facebook ya Chibwezi</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#f0f2f5}
+.header{background:#1877f2;color:white;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+.logo{font-size:24px;font-weight:bold}
+.search{width:300px;padding:8px 15px;border-radius:20px;border:none}
+.main{display:flex;max-width:1300px;margin:20px auto;gap:15px;padding:0 10px}
+.left{width:250px;background:white;border-radius:10px;padding:15px;height:fit-content;position:sticky;top:80px}
+.left p{padding:10px;cursor:pointer;border-radius:8px}
+.left p:hover{background:#f0f2f5}
+.active-dating{background:#ffe6e6;color:#c1272d;font-weight:bold}
+.center{flex:1}
+.stories{background:white;border-radius:10px;padding:15px;display:flex;gap:12px;overflow-x:auto;margin-bottom:15px}
+.s{ text-align:center; min-width:60px }
+.s img{width:60px;height:60px;border-radius:50%;border:3px solid #1877f2}
+.create-post{background:white;border-radius:10px;padding:15px;margin-bottom:15px}
+.create-post input{width:100%;background:#f0f2f5;border:none;padding:12px;border-radius:20px;margin-top:10px}
+.post{background:white;border-radius:10px;padding:15px;margin-bottom:15px}
+.post-h{display:flex;gap:10px;align-items:center}
+.post-h img{width:40px;height:40px;border-radius:50%}
+.post-img{width:100%;border-radius:10px;margin:10px 0;max-height:350px;object-fit:cover}
+.actions{display:flex;justify-content:space-around;border-top:1px solid #ddd;padding-top:10px;margin-top:10px}
+.actions button{border:none;padding:8px 15px;border-radius:6px;cursor:pointer;background:#e4e6eb}
+.btn-love{background:#c1272d!important;color:white}
+.right{width:250px;background:white;border-radius:10px;padding:15px;height:fit-content;position:sticky;top:80px}
+.contact{display:flex;align-items:center;gap:10px;padding:8px 0}
+.contact img{width:32px;height:32px;border-radius:50%}
+.online{width:8px;height:8px;background:green;border-radius:50%;display:inline-block}
+.chat-popup{position:fixed;bottom:0;right:20px;width:320px;background:white;border-radius:10px 10px 0 0;box-shadow:0 0 10px rgba(0,0,0,0.3);display:none;flex-direction:column;height:400px}
+.chat-h{background:#1877f2;color:white;padding:10px;display:flex;justify-content:space-between}
+.chat-m{flex:1;padding:10px;overflow-y:auto;background:#f0f2f5}
+.msg{padding:8px 12px;border-radius:18px;margin:5px 0;max-width:70%}
+.me{background:#0084ff;color:white;margin-left:auto}
+.other{background:white}
+.chat-i{display:flex;padding:10px;gap:5px}
+.chat-i input{flex:1;border:none;background:#f0f2f5;border-radius:20px;padding:8px 12px}
+.login-modal{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:1000}
+.login-box{background:white;padding:25px;border-radius:10px;width:360px;text-align:center}
+.login-box input{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:6px}
+.login-box button{width:100%;padding:12px;background:#1877f2;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;margin-top:10px}
+@media(max-width:900px){.left,.right{display:none}.search{width:150px}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">❤️ Malawi Love</div>
+  <input class="search" placeholder="🔍 Search Malawi Love">
+  <div onclick="toggleChat()">💬 🔔 👤</div>
+</div>
+
+<!-- LOGIN -->
+<div class="login-modal" id="loginModal">
+  <div class="login-box">
+    <h2 style="color:#c1272d">❤️ Malawi Love</h2>
+    <p>Facebook ya Chibwezi ku Malawi</p>
+    <input type="text" id="regName" placeholder="Dzina lanu - Mwachitsanzo Pati">
+    <input type="email" id="regEmail" placeholder="Email">
+    <input type="password" id="regPass" placeholder="Password">
+    <button onclick="register()">Lowani / Pangani Account</button>
+    <p style="margin-top:10px;font-size:12px;color:gray">Mukalowa mudzaoneka ngati Facebook</p>
+  </div>
+</div>
+
+<div class="main">
+  <div class="left">
+    <p id="userDisplay">👤 Pati</p>
+    <p>👥 Friends</p>
+    <p>👥 Groups</p>
+    <p class="active-dating">❤️ Dating - Discover</p>
+    <p>🕘 Memories</p>
+    <p>🔖 Saved</p>
+    <p>📅 Events</p>
+    <p>📄 Pages</p>
+    <hr style="margin:10px 0">
+    <p style="color:#c1272d"><b>Anthu Oyandikira:</b><br>Lilongwe • Blantyre • Mzuzu</p>
+  </div>
+
+  <div class="center">
+    <div class="stories">
+      <div class="s"><img src="https://i.pravatar.cc/100?img=5"><br>Chisomo</div>
+      <div class="s"><img src="https://i.pravatar.cc/100?img=6"><br>Thoko</div>
+      <div class="s"><img src="https://i.pravatar.cc/100?img=8"><br>Gift</div>
+      <div class="s"><img src="https://i.pravatar.cc/100?img=9"><br>Aisha</div>
+      <div class="s"><img src="https://i.pravatar.cc/100?img=10"><br>Kelvin</div>
+      <div class="s"><img src="https://i.pravatar.cc/100?img=12"><br>Emmanuel</div>
+    </div>
+
+    <div class="create-post">
+      <div style="display:flex;gap:10px;align-items:center">
+        <img src="https://i.pravatar.cc/100?img=15" style="width:40px;border-radius:50%">
+        <input type="text" id="newPostText" placeholder="Pati, mukuganiza chiyani? Mukufuna chibwezi chotani?">
+      </div>
+      <button onclick="createPost()" style="margin-top:10px;background:#c1272d;color:white;border:none;padding:8px 15px;border-radius:6px;float:right">Post</button>
+      <div style="clear:both"></div>
+    </div>
+
+    <div id="feed">
+      <div class="post">
+        <div class="post-h">
+          <img src="https://i.pravatar.cc/100?img=32">
+          <div><b>Chimwemwe, 24 • Lilongwe</b><br><small>2h • Public • 2km away</small></div>
+        </div>
+        <p style="margin:10px 0">Looking for genuine connection ❤️ Ndili ku Area 47, ndimakonda coffee ndi ma walk ku Bwaila. Ticheze?</p>
+        <img class="post-img" src="https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600">
+        <p>❤️ 24 👍 12 • 3 comments</p>
+        <div class="actions">
+          <button onclick="like(this)">👍 Like</button>
+          <button onclick="toggleChat()">💬 Comment</button>
+          <button>↗️ Share</button>
+          <button class="btn-love" onclick="superLike('Chimwemwe')">❤️ Super Like = Match</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right">
+    <b>Contacts • Online</b>
+    <div class="contact" onclick="openChat('Chisomo')"><img src="https://i.pravatar.cc/100?img=5"><span>Chisomo</span><span class="online"></span></div>
+    <div class="contact" onclick="openChat('Thoko')"><img src="https://i.pravatar.cc/100?img=6"><span>Thoko</span><span class="online"></span></div>
+    <div class="contact" onclick="openChat('Aisha')"><img src="https://i.pravatar.cc/100?img=9"><span>Aisha</span><span class="online"></span></div>
+    <div class="contact" onclick="openChat('Gift')"><img src="https://i.pravatar.cc/100?img=8"><span>Gift</span><span class="online"></span></div>
+  </div>
+</div>
+
+<!-- CHAT POPUP -->
+<div class="chat-popup" id="chatPopup">
+  <div class="chat-h"><span id="chatName">Chisomo • Active now</span><span onclick="toggleChat()" style="cursor:pointer">✕</span></div>
+  <div class="chat-m" id="chatMessages">
+    <div class="msg other">Hi Pati! 😊</div>
+    <div class="msg other">Muli bwanji?</div>
+  </div>
+  <div class="chat-i">
+    <input type="text" id="chatInput" placeholder="Aa Message..." onkeypress="if(event.key==='Enter')sendMsg()">
+    <button onclick="sendMsg()" style="background:#0084ff;color:white;border:none;border-radius:50%;width:32px;height:32px">➤</button>
+  </div>
+</div>
+
+<script>
+// FULL LOGIC
+let currentUser = "Pati";
+function register(){
+  let name = document.getElementById('regName').value;
+  let email = document.getElementById('regEmail').value;
+  if(name) currentUser = name;
+  document.getElementById('userDisplay').textContent = "👤 " + currentUser;
+  document.getElementById('loginModal').style.display = "none";
+  // Apa ndipamene Firebase code idzalumikizidwa
+  alert("Takulandirani " + currentUser + " ku Malawi Love! ❤️ Tsopano muli ngati pa Facebook.");
+}
+
+function createPost(){
+  let text = document.getElementById('newPostText').value;
+  if(!text) return;
+  let feed = document.getElementById('feed');
+  let div = document.createElement('div');
+  div.className = 'post';
+  div.innerHTML = `<div class="post-h"><img src="https://i.pravatar.cc/100?img=15"><div><b>${currentUser}</b><br><small>Just now • Public</small></div></div><p style="margin:10px 0">${text}</p><div class="actions"><button onclick="like(this)">👍 Like</button><button>💬 Comment</button><button>↗️ Share</button><button class="btn-love">❤️ Like</button></div>`;
+  feed.prepend(div);
+  document.getElementById('newPostText').value = "";
+}
+
+function like(btn){ btn.textContent = "❤️ Liked"; btn.style.color = "#c1272d"; }
+
+function superLike(name){
+  alert("❤️ MATCH! Inu ndi " + name + " mwakondana! Pitani ku Chat mukacheze.");
+  openChat(name);
+}
+
+function toggleChat(){
+  let p = document.getElementById('chatPopup');
+  p.style.display = p.style.display === 'flex' ? 'none' : 'flex';
+}
+
+function openChat(name){
+  document.getElementById('chatName').textContent = name + " • Active now";
+  document.getElementById('chatPopup').style.display = 'flex';
+}
+
+function sendMsg(){
+  let input = document.getElementById('chatInput');
+  if(!input.value.trim()) return;
+  let box = document.getElementById('chatMessages');
+  let d = document.createElement('div');
+  d.className = 'msg me';
+  d.textContent = input.value;
+  box.appendChild(d);
+  input.value = "";
+  box.scrollTop = box.scrollHeight;
+  // Reply yongopeka
+  setTimeout(()=>{
+    let r = document.createElement('div');
+    r.className = 'msg other';
+    r.textContent = "Zabwino kwambiri Pati! 😊 Ticheze mawa?";
+    box.appendChild(r);
+    box.scrollTop = box.scrollHeight;
+  }, 1000);
+}
+</script>
+</body>
+  </html>

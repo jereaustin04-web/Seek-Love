@@ -27,17 +27,16 @@ body{background:#fff5f5}
 .tab2 button{flex:1;padding:8px;border:none;border-radius:8px;cursor:pointer;font-weight:bold;background:transparent}
 .tab2 button.active2{background:#c1272d;color:white}
 .hidden{display:none}
-.fb-friend{display:flex;align-items:center;gap:12px;padding:12px 14px;background:white;border-radius:12px;margin-bottom:8px;border:1px solid #ffe6e6;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
-.fb-friend img.avatar{width:70px;height:70px;border-radius:50%;object-fit:cover;cursor:pointer;border:1px solid #ffe6e6}
+.fb-friend{display:flex;align-items:center;gap:12px;padding:12px 14px;background:white;border-radius:12px;margin-bottom:8px;border:1px solid #ffe6e6}
+.fb-friend img.avatar{width:70px;height:70px;border-radius:50%;object-fit:cover;cursor:pointer}
 .fb-friend-info{flex:1}
-.fb-friend-info b{font-size:16px;display:block;color:#333}
+.fb-friend-info b{font-size:16px;display:block}
 .fb-mutual{color:gray;font-size:13px;display:flex;align-items:center;gap:4px;margin:3px 0}
-.fb-mutual.stack{display:flex;margin-right:4px}
+.fb-mutual.stack{display:flex}
 .fb-mutual.stack img{width:20px;height:20px;border-radius:50%;border:2px solid white;margin-left:-6px}
 .fb-mutual.stack img:first-child{margin-left:0}
 .fb-actions{display:flex;gap:8px;margin-top:7px}
 .btn-add{background:#1877f2;color:white;border:none;padding:8px 0;width:135px;border-radius:8px;font-weight:bold;cursor:pointer}
-.btn-remove{background:#e4e6eb;color:#050505;border:none;padding:8px 0;width:105px;border-radius:8px;font-weight:bold;cursor:pointer}
 .btn-following{background:#e4e6eb;color:#050505;border:none;padding:8px 0;width:135px;border-radius:8px;font-weight:bold;cursor:pointer}
 .btn-msg{background:#c1272d;color:white;border:none;padding:8px 12px;border-radius:8px;font-weight:bold;cursor:pointer}
 .chat-modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:flex-end;justify-content:center;z-index:2000}
@@ -51,12 +50,11 @@ body{background:#fff5f5}
 .chat-in input{flex:1;padding:10px;border:2px solid #ffe6e6;border-radius:20px}
 .fb-profile-cover{height:240px;background:linear-gradient(180deg,#c1272d,#ff8fa3);position:relative;border-radius:0 0 16px 16px;overflow:hidden}
 .fb-profile-cover img{width:100%;height:100%;object-fit:cover}
-.fb-profile-avatar{width:140px;height:140px;border-radius:50%;border:5px solid white;position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);object-fit:cover;background:white;cursor:pointer}
-.fb-cam{position:absolute;width:36px;height:36px;background:#e4e6eb;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid white;box-shadow:0 2px 5px rgba(0,0,0,0.2)}
+.fb-profile-avatar{width:140px;height:140px;border-radius:50%;border:5px solid white;position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);object-fit:cover;background:white}
+.fb-cam{position:absolute;width:36px;height:36px;background:#e4e6eb;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid white;box-shadow:0 2px 5px rgba(0,0,0,0.3)}
 .fb-cam.cover{bottom:15px;right:15px}
 .fb-cam.avatar{bottom:-40px;left:58%;width:32px;height:32px}
 .fb-profile-info{background:white;padding:75px 16px 16px;border-radius:16px;margin-top:-15px;text-align:center;border:1px solid #ffe6e6}
-.fb-profile-info h2{font-size:24px;font-weight:bold;color:#050505}
 .fb-profile-stats{display:flex;justify-content:center;gap:20px;margin:10px 0;font-size:14px;color:#65676b}
 .fb-profile-stats b{color:#050505}
 .fb-profile-actions{display:flex;gap:8px;justify-content:center;margin:12px 0}
@@ -64,8 +62,7 @@ body{background:#fff5f5}
 .fb-tabs button{flex:1;padding:10px;border:none;background:transparent;font-weight:bold;border-radius:8px;cursor:pointer;color:#65676b}
 .fb-tabs button.active{background:#e7f3ff;color:#1877f2}
 .fb-about{background:white;border-radius:12px;padding:16px;margin-top:10px;border:1px solid #ffe6e6}
-.fb-about-item{display:flex;align-items:center;gap:12px;padding:8px 0;color:#050505}
-.fb-about-item i{width:20px;color:#65676b}
+.fb-about-item{display:flex;align-items:center;gap:12px;padding:8px 0}
 .fb-friends-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
 .fb-friends-grid div{text-align:center;cursor:pointer}
 .fb-friends-grid img{width:100%;aspect-ratio:1;border-radius:12px;object-fit:cover}
@@ -109,17 +106,15 @@ body{background:#fff5f5}
 <div id="homeS" style="display:none"><div id="feed"></div></div>
 <div id="friendsS"><div class="card" style="background:#c1272d;color:white"><h3>Discover</h3><p id="tot"></p></div><div id="grid"></div></div>
 <div id="inboxS" style="display:none"><div class="card"><h3>Inbox</h3><div id="inbox"></div></div></div>
-
 <div id="profS" style="display:none">
 <div class="fb-profile-cover">
 <img id="coverImg" src="https://picsum.photos/800/300?random=1">
 <div class="fb-cam cover" id="coverCam" style="display:none" onclick="document.getElementById('coverUpload').click()"><i class="fas fa-camera"></i></div>
-<img id="profA" class="fb-profile-avatar" onclick="if(view && view.id==cur.id) document.getElementById('avatarUpload').click()">
+<img id="profA" class="fb-profile-avatar">
 <div class="fb-cam avatar" id="avatarCam" style="display:none" onclick="document.getElementById('avatarUpload').click()"><i class="fas fa-camera"></i></div>
 </div>
 <input type="file" id="coverUpload" accept="image/*" style="display:none" onchange="uploadCover(this)">
 <input type="file" id="avatarUpload" accept="image/*" style="display:none" onchange="uploadAvatar(this, false)">
-
 <div class="fb-profile-info">
 <h2 id="profN"></h2>
 <p id="profBioShort" style="color:#050505;margin:6px 0"></p>
@@ -127,25 +122,15 @@ body{background:#fff5f5}
 <p id="profB" style="background:#f0f2f5;padding:10px;border-radius:10px;margin:10px 0;text-align:left"></p>
 <div class="fb-profile-actions">
 <button id="profBtn" class="btn-add" style="width:140px" onclick="tog()"></button>
-<button id="profMsg" class="btn-msg" style="width:140px" onclick="openChatP()"><i class="fas fa-comment"></i> Message</button>
-<button id="profEdit" class="btn-remove" style="display:none;width:140px" onclick="openEdit()"><i class="fas fa-pen"></i> Edit</button>
+<button id="profMsg" class="btn-msg" style="width:140px" onclick="openChatP()">Message</button>
+<button id="profEdit" class="btn-remove" style="display:none;width:140px" onclick="openEdit()">Edit</button>
 </div>
 </div>
-<div class="fb-tabs">
-<button id="ptAbout" class="active" onclick="showPTab('about')">About</button>
-<button id="ptFriends" onclick="showPTab('friends')">Friends</button>
-<button id="ptPhotos" onclick="showPTab('photos')">Photos</button>
-</div>
-<div id="pAbout" class="fb-about">
-<div class="fb-about-item"><i class="fas fa-briefcase"></i><span>Works at Malawi Love</span></div>
-<div class="fb-about-item"><i class="fas fa-home"></i><span id="abCity"></span></div>
-<div class="fb-about-item"><i class="fas fa-venus-mars"></i><span id="abGender"></span></div>
-<div class="fb-about-item"><i class="fas fa-phone"></i><span id="abPhone"></span></div>
-</div>
+<div class="fb-tabs"><button id="ptAbout" class="active" onclick="showPTab('about')">About</button><button id="ptFriends" onclick="showPTab('friends')">Friends</button><button id="ptPhotos" onclick="showPTab('photos')">Photos</button></div>
+<div id="pAbout" class="fb-about"><div class="fb-about-item"><i class="fas fa-home"></i><span id="abCity"></span></div><div class="fb-about-item"><i class="fas fa-venus-mars"></i><span id="abGender"></span></div><div class="fb-about-item"><i class="fas fa-phone"></i><span id="abPhone"></span></div></div>
 <div id="pFriends" class="fb-about" style="display:none"><h3>Friends <span id="friendsCount"></span></h3><div id="profileFriendsGrid" class="fb-friends-grid"></div></div>
 <div id="pPhotos" class="fb-about" style="display:none"><h3>Photos</h3><div id="photosGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:10px"></div></div>
 </div>
-
 </div>
 </div>
 
@@ -160,10 +145,7 @@ body{background:#fff5f5}
 <div class="fb-edit-modal" id="editM">
 <div class="fb-edit-box">
 <h3>Edit Profile</h3>
-<div style="text-align:center;margin-bottom:10px">
-<img id="editPreview" src="" style="width:80px;height:80px;border-radius:50%;border:3px solid #c1272d">
-<br><button class="btn-white" style="width:auto;padding:6px 12px;font-size:12px;margin-top:6px" onclick="document.getElementById('avatarUpload').click()">Change Photo</button>
-</div>
+<div style="text-align:center;margin-bottom:10px"><img id="editPreview" src="" style="width:80px;height:80px;border-radius:50%"><br><button class="btn-white" style="width:auto;padding:6px 12px;font-size:12px;margin-top:6px" onclick="document.getElementById('avatarUpload').click()">Change Photo</button></div>
 <input id="eName" placeholder="Name" style="width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:8px">
 <input id="eBio" placeholder="Bio" style="width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:8px">
 <input id="eCity" placeholder="City" style="width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:8px">
@@ -177,10 +159,8 @@ var supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIs
 var client = window.supabase.createClient(supabaseUrl, supabaseKey);
 var cur = JSON.parse(localStorage.getItem('currentUser')||'null');
 var view = null, chatWith = null, cache = [];
-
 function showL(){document.getElementById('fL').classList.remove('hidden');document.getElementById('fC').classList.add('hidden');document.getElementById('tL').classList.add('active2');document.getElementById('tC').classList.remove('active2');}
 function showC(){document.getElementById('fC').classList.remove('hidden');document.getElementById('fL').classList.add('hidden');document.getElementById('tC').classList.add('active2');document.getElementById('tL').classList.remove('active2');}
-
 async function createA(){
 var n=document.getElementById('rN').value.trim(),p=document.getElementById('rP').value.trim(),g=document.getElementById('rG').value,c=document.getElementById('rCity').value,pa=document.getElementById('rPass').value;
 if(!n||!p||!pa){document.getElementById('st').textContent="Fill all";return;}
@@ -337,8 +317,7 @@ return '<div onclick="openP('+u.id+')"><img src="'+u.avatar+'"><div style="font-
 }
 function loadPhotos(){
 if(!view) return;
-var grid=document.getElementById('photosGrid');
-grid.innerHTML='<img src="'+view.avatar+'" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px"><img src="'+(view.cover||'https://picsum.photos/400')+'" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px">';
+document.getElementById('photosGrid').innerHTML='<img src="'+view.avatar+'" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px"><img src="'+(view.cover||'https://picsum.photos/400')+'" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px">';
 }
 function openEdit(){
 if(!view||view.id!=cur.id) return;
@@ -358,69 +337,52 @@ var res=await client.from('Love Seek').update({name:n,bio:b,city:c}).eq('id',cur
 if(res.error){alert(res.error.message);return;}
 cur=res.data[0];localStorage.setItem('currentUser',JSON.stringify(cur));view=cur;closeEdit();openP(cur.id);updateF();
 }
-
-// UPLOAD PROFILE PICTURE - FACEBOOK DESIGN
+// UPLOAD YOPHWEKA - POPANDA STORAGE
 async function uploadAvatar(input, isLeft){
 var file=input.files[0];if(!file) return;
-if(file.size>5*1024*1024){alert("Chithunzi chachikulu kwambiri! Max 5MB");return;}
 var reader=new FileReader();
 reader.onload=function(e){
-var base64=e.target.result;
-document.getElementById('profA').src=base64;
-if(isLeft) document.getElementById('leftA').src=base64;
-document.getElementById('topA').src=base64;
-document.getElementById('editPreview').src=base64;
+var img=new Image();
+img.src=e.target.result;
+img.onload=async function(){
+var canvas=document.createElement('canvas');
+var max=300; var w=img.width, h=img.height;
+if(w>h){if(w>max){h*=max/w;w=max;}}else{if(h>max){w*=max/h;h=max;}}
+canvas.width=w;canvas.height=h;
+canvas.getContext('2d').drawImage(img,0,0,w,h);
+var small=canvas.toDataURL('image/jpeg',0.6);
+document.getElementById('profA').src=small;
+document.getElementById('leftA').src=small;
+document.getElementById('topA').src=small;
+document.getElementById('editPreview').src=small;
+var res=await client.from('Love Seek').update({avatar:small}).eq('id',cur.id).select();
+if(res.data){cur=res.data[0];localStorage.setItem('currentUser',JSON.stringify(cur)); render();}
+else if(res.error){alert(res.error.message);}
+};
 };
 reader.readAsDataURL(file);
-
-// Upload to Supabase Storage
-try{
-var fileName=cur.id+'_avatar_'+Date.now()+'.jpg';
-var upload=await client.storage.from('avatars').upload(fileName, file);
-if(upload.error){
-// Ngati bucket palibe, pangani mu SQL: Storage > Create bucket avatars public
-// Kenako gwiritsani base64 ngati fallback
-var res=await client.from('Love Seek').update({avatar: reader.result || cur.avatar}).eq('id',cur.id).select();
-}else{
-var url=client.storage.from('avatars').getPublicUrl(fileName).data.publicUrl;
-var res=await client.from('Love Seek').update({avatar:url}).eq('id',cur.id).select();
 }
-if(res && res.data){
-cur=res.data[0];localStorage.setItem('currentUser',JSON.stringify(cur));
-document.getElementById('leftA').src=cur.avatar;
-document.getElementById('topA').src=cur.avatar;
-}
-}catch(err){
-console.log(err);
-// Fallback: sungani ngati base64 URL kwakanthawi
-try{
-var res2=await client.from('Love Seek').update({avatar: document.getElementById('profA').src}).eq('id',cur.id).select();
-if(res2.data){cur=res2.data[0];localStorage.setItem('currentUser',JSON.stringify(cur));}
-}catch(e){}
-}
-}
-
 async function uploadCover(input){
 var file=input.files[0];if(!file) return;
 var reader=new FileReader();
-reader.onload=function(e){document.getElementById('coverImg').src=e.target.result;};
+reader.onload=function(e){
+var img=new Image();
+img.src=e.target.result;
+img.onload=async function(){
+var canvas=document.createElement('canvas');
+canvas.width=800;canvas.height=300;
+canvas.getContext('2d').drawImage(img,0,0,800,300);
+var small=canvas.toDataURL('image/jpeg',0.6);
+document.getElementById('coverImg').src=small;
+var res=await client.from('Love Seek').update({cover:small}).eq('id',cur.id).select();
+if(res.data){cur=res.data[0];localStorage.setItem('currentUser',JSON.stringify(cur));}
+};
+};
 reader.readAsDataURL(file);
-try{
-var fileName=cur.id+'_cover_'+Date.now()+'.jpg';
-var upload=await client.storage.from('avatars').upload(fileName, file);
-if(!upload.error){
-var url=client.storage.from('avatars').getPublicUrl(fileName).data.publicUrl;
-var res=await client.from('Love Seek').update({cover:url}).eq('id',cur.id).select();
-if(res.data){cur=res.data[0];localStorage.setItem('currentUser',JSON.stringify(cur));}
-}else{
-var res=await client.from('Love Seek').update({cover: document.getElementById('coverImg').src}).eq('id',cur.id).select();
-if(res.data){cur=res.data[0];localStorage.setItem('currentUser',JSON.stringify(cur));}
 }
-}catch(err){}
-}
-
 function logout(){localStorage.removeItem('currentUser');location.reload();}
 if(cur) init();
 </script>
 </body>
 </html>
+            

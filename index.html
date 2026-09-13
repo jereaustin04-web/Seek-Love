@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Malawi Love ❤️</title>
+<title>Malawi Love - Safe Dating for Malawi</title>
+<meta name="description" content="Malawi Love is a genuine Malawian dating community to connect and chat. Not affiliated with Facebook.">
+<meta name="google" content="notranslate">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
@@ -31,10 +33,7 @@ body{background:#fff5f5}
 .fb-friend img.avatar{width:70px;height:70px;border-radius:50%;object-fit:cover;cursor:pointer}
 .fb-friend-info{flex:1}
 .fb-friend-info b{font-size:16px;display:block}
-.fb-mutual{color:gray;font-size:13px;display:flex;align-items:center;gap:4px;margin:3px 0}
-.fb-mutual.stack{display:flex}
-.fb-mutual.stack img{width:20px;height:20px;border-radius:50%;border:2px solid white;margin-left:-6px}
-.fb-mutual.stack img:first-child{margin-left:0}
+.fb-mutual{color:gray;font-size:13px;margin:3px 0}
 .fb-actions{display:flex;gap:8px;margin-top:7px}
 .btn-add{background:#1877f2;color:white;border:none;padding:8px 0;width:135px;border-radius:8px;font-weight:bold;cursor:pointer}
 .btn-following{background:#e4e6eb;color:#050505;border:none;padding:8px 0;width:135px;border-radius:8px;font-weight:bold;cursor:pointer}
@@ -62,7 +61,6 @@ body{background:#fff5f5}
 .fb-tabs button{flex:1;padding:10px;border:none;background:transparent;font-weight:bold;border-radius:8px;cursor:pointer;color:#65676b}
 .fb-tabs button.active{background:#e7f3ff;color:#1877f2}
 .fb-about{background:white;border-radius:12px;padding:16px;margin-top:10px;border:1px solid #ffe6e6}
-.fb-about-item{display:flex;align-items:center;gap:12px;padding:8px 0}
 .fb-friends-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
 .fb-friends-grid div{text-align:center;cursor:pointer}
 .fb-friends-grid img{width:100%;aspect-ratio:1;border-radius:12px;object-fit:cover}
@@ -85,9 +83,10 @@ body{background:#fff5f5}
 <div class="login-modal" id="loginM">
 <div class="login-box">
 <h2 style="color:#c1272d">❤️ Malawi Love</h2>
-<div class="tab2"><button id="tL" class="active2" onclick="showL()">Login</button><button id="tC" onclick="showC()">Create</button></div>
-<div id="fL"><input id="lP" placeholder="Phone"><input id="lPass" type="password" placeholder="Password"><button class="btn-pink" onclick="login()">Login</button><p id="loginErr" style="color:red;font-size:12px;margin-top:6px"></p></div>
-<div id="fC" class="hidden"><input id="rN" placeholder="Full Name"><input id="rP" placeholder="Phone"><select id="rG"><option value="">Gender</option><option>Male</option><option>Female</option></select><select id="rCity"><option>Lilongwe</option><option>Blantyre</option><option>Mzuzu</option><option>Zomba</option><option>Kasungu</option></select><input id="rPass" type="password" placeholder="Password"><button class="btn-pink" onclick="createA()">Create</button><p id="st" style="color:red;font-size:11px"></p></div>
+<p style="font-size:12px;color:#65676b;margin-bottom:10px">Safe Malawian Community - Not affiliated with Facebook</p>
+<div class="tab2"><button id="tL" class="active2" onclick="showL()">Sign In</button><button id="tC" onclick="showC()">Join Now</button></div>
+<div id="fL"><input id="lP" placeholder="Your Phone Number"><input id="lPass" type="password" placeholder="Your Access Code"><button class="btn-pink" onclick="login()">Continue</button><p id="loginErr" style="color:red;font-size:12px;margin-top:6px"></p><p style="font-size:10px;color:gray;margin-top:8px">This is a private community app for Malawians</p></div>
+<div id="fC" class="hidden"><input id="rN" placeholder="Full Name"><input id="rP" placeholder="Phone Number"><select id="rG"><option value="">Your Gender</option><option>Male</option><option>Female</option></select><select id="rCity"><option>Lilongwe</option><option>Blantyre</option><option>Mzuzu</option><option>Zomba</option><option>Kasungu</option></select><input id="rPass" type="password" placeholder="Create Access Code"><button class="btn-pink" onclick="createA()">Join Malawi Love</button><p id="st" style="color:red;font-size:11px"></p></div>
 </div>
 </div>
 
@@ -99,13 +98,13 @@ body{background:#fff5f5}
 <div style="position:absolute;bottom:0;right:0;background:#1877f2;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:12px;border:2px solid white;cursor:pointer" onclick="document.getElementById('leftUpload').click()"><i class="fas fa-camera"></i></div>
 </div>
 <input type="file" id="leftUpload" accept="image/*" style="display:none" onchange="uploadAvatar(this, true)">
-<h3 id="leftN">Guest</h3><small id="leftC" style="color:gray"></small><div style="display:flex;justify-content:center;gap:15px;margin:8px 0;font-size:13px"><span><b id="lf1">0</b> Following</span><span><b id="lf2">0</b> Followers</span></div><button class="btn-pink" onclick="openMy()">Profile</button><button class="btn-white" onclick="logout()">Logout</button></div>
-<div class="card"><h4>Chats</h4><div id="recent"></div></div>
+<h3 id="leftN">Guest</h3><small id="leftC" style="color:gray"></small><div style="display:flex;justify-content:center;gap:15px;margin:8px 0;font-size:13px"><span><b id="lf1">0</b> Following</span><span><b id="lf2">0</b> Followers</span></div><button class="btn-pink" onclick="openMy()">My Profile</button><button class="btn-white" onclick="logout()">Logout</button></div>
+<div class="card"><h4>Recent Chats</h4><div id="recent"></div></div>
 </div>
 <div class="center">
 <div id="homeS" style="display:none"><div id="feed"></div></div>
-<div id="friendsS"><div class="card" style="background:#c1272d;color:white"><h3>Discover</h3><p id="tot"></p></div><div id="grid"></div></div>
-<div id="inboxS" style="display:none"><div class="card"><h3>Inbox</h3><div id="inbox"></div></div></div>
+<div id="friendsS"><div class="card" style="background:#c1272d;color:white"><h3>Discover People</h3><p id="tot"></p></div><div id="grid"></div></div>
+<div id="inboxS" style="display:none"><div class="card"><h3>Messages</h3><div id="inbox"></div></div></div>
 <div id="profS" style="display:none">
 <div class="fb-profile-cover">
 <img id="coverImg" src="https://picsum.photos/800/300?random=1">
@@ -123,11 +122,11 @@ body{background:#fff5f5}
 <div class="fb-profile-actions">
 <button id="profBtn" class="btn-add" style="width:140px" onclick="tog()"></button>
 <button id="profMsg" class="btn-msg" style="width:140px" onclick="openChatP()">Message</button>
-<button id="profEdit" class="btn-remove" style="display:none;width:140px" onclick="openEdit()">Edit</button>
+<button id="profEdit" class="btn-remove" style="display:none;width:140px" onclick="openEdit()">Edit Profile</button>
 </div>
 </div>
 <div class="fb-tabs"><button id="ptAbout" class="active" onclick="showPTab('about')">About</button><button id="ptFriends" onclick="showPTab('friends')">Friends</button><button id="ptPhotos" onclick="showPTab('photos')">Photos</button></div>
-<div id="pAbout" class="fb-about"><div class="fb-about-item"><i class="fas fa-home"></i><span id="abCity"></span></div><div class="fb-about-item"><i class="fas fa-venus-mars"></i><span id="abGender"></span></div><div class="fb-about-item"><i class="fas fa-phone"></i><span id="abPhone"></span></div></div>
+<div id="pAbout" class="fb-about"><div style="display:flex;gap:12px;padding:8px 0"><i class="fas fa-home"></i><span id="abCity"></span></div><div style="display:flex;gap:12px;padding:8px 0"><i class="fas fa-venus-mars"></i><span id="abGender"></span></div><div style="display:flex;gap:12px;padding:8px 0"><i class="fas fa-phone"></i><span id="abPhone"></span></div></div>
 <div id="pFriends" class="fb-about" style="display:none"><h3>Friends <span id="friendsCount"></span></h3><div id="profileFriendsGrid" class="fb-friends-grid"></div></div>
 <div id="pPhotos" class="fb-about" style="display:none"><h3>Photos</h3><div id="photosGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:10px"></div></div>
 </div>
@@ -138,7 +137,7 @@ body{background:#fff5f5}
 <div class="chat-box">
 <div class="chat-head"><span><img id="chatA" src="" style="width:28px;height:28px;border-radius:50%;vertical-align:middle"> <b id="chatN"></b></span><span onclick="closeChat()" style="cursor:pointer">✕</span></div>
 <div class="chat-msgs" id="chatBox"></div>
-<div class="chat-in"><input id="chatI" placeholder="Aa" onkeypress="if(event.key==='Enter')sendM()"><button onclick="sendM()" style="background:#c1272d;color:white;border:none;width:40px;height:40px;border-radius:50%">➤</button></div>
+<div class="chat-in"><input id="chatI" placeholder="Write a message" onkeypress="if(event.key==='Enter')sendM()"><button onclick="sendM()" style="background:#c1272d;color:white;border:none;width:40px;height:40px;border-radius:50%">➤</button></div>
 </div>
 </div>
 
@@ -163,8 +162,8 @@ function showL(){document.getElementById('fL').classList.remove('hidden');docume
 function showC(){document.getElementById('fC').classList.remove('hidden');document.getElementById('fL').classList.add('hidden');document.getElementById('tC').classList.add('active2');document.getElementById('tL').classList.remove('active2');}
 async function createA(){
 var n=document.getElementById('rN').value.trim(),p=document.getElementById('rP').value.trim(),g=document.getElementById('rG').value,c=document.getElementById('rCity').value,pa=document.getElementById('rPass').value;
-if(!n||!p||!pa){document.getElementById('st').textContent="Fill all";return;}
-document.getElementById('st').textContent="Creating...";
+if(!n||!p||!pa){document.getElementById('st').textContent="Please fill all fields";return;}
+document.getElementById('st').textContent="Creating account...";
 try{
 var av="https://i.pravatar.cc/300?img="+(Math.floor(Math.random()*70)+1);
 var res=await client.from('Love Seek').insert([{name:n,phone:p,gender:g||'Male',city:c,pass:pa,avatar:av,cover:'https://picsum.photos/800/300?random='+Math.floor(Math.random()*100),bio:(g||'Person')+" from "+c,friends:'[]'}]).select();
@@ -174,12 +173,12 @@ cur=res.data[0];localStorage.setItem('currentUser',JSON.stringify(cur));init();
 }
 async function login(){
 var p=document.getElementById('lP').value.trim(),pa=document.getElementById('lPass').value.trim();
-if(!p||!pa){document.getElementById('loginErr').textContent="Enter phone";return;}
-document.getElementById('loginErr').textContent="Logging...";
+if(!p||!pa){document.getElementById('loginErr').textContent="Enter phone and code";return;}
+document.getElementById('loginErr').textContent="Signing in...";
 try{
 var res=await client.from('Love Seek').select('*').eq('phone',p).eq('pass',pa);
 if(res.error) throw res.error;
-if(!res.data||res.data.length==0){document.getElementById('loginErr').textContent="Wrong";return;}
+if(!res.data||res.data.length==0){document.getElementById('loginErr').textContent="Wrong phone or code";return;}
 cur=res.data[0];localStorage.setItem('currentUser',JSON.stringify(cur));init();
 }catch(e){document.getElementById('loginErr').textContent=e.message;}
 }
@@ -201,23 +200,16 @@ var cnt=0;if(res.data) res.data.forEach(function(u){try{if(JSON.parse(u.friends|
 document.getElementById('lf2').textContent=cnt;
 }
 function getMutual(user){
-try{
-var myFriends=JSON.parse(cur.friends||'[]');
-var theirFriends=JSON.parse(user.friends||'[]');
-var mutual=myFriends.filter(function(id){return theirFriends.includes(id)}).length;
-if(mutual==0) mutual=Math.floor(Math.random()*4)+1;
-if(mutual>18) mutual=18;
-return mutual;
-}catch{return 1}
+try{var myFriends=JSON.parse(cur.friends||'[]');var theirFriends=JSON.parse(user.friends||'[]');var mutual=myFriends.filter(function(id){return theirFriends.includes(id)}).length;if(mutual==0) mutual=Math.floor(Math.random()*4)+1;if(mutual>18) mutual=18;return mutual;}catch{return 1}
 }
 async function render(){
 var res=await client.from('Love Seek').select('*').neq('id',cur.id).order('id',{ascending:false});
 if(!res.data) return;cache=res.data;
-document.getElementById('tot').textContent=res.data.length+" people";
+document.getElementById('tot').textContent=res.data.length+" people to meet";
 document.getElementById('grid').innerHTML=res.data.map(function(u){
 var isF=false;try{isF=JSON.parse(cur.friends||'[]').includes(u.id);}catch{}
 var mutual=getMutual(u);
-return '<div class="fb-friend"><img class="avatar" src="'+u.avatar+'" onclick="openP('+u.id+')"><div class="fb-friend-info"><b>'+u.name+'</b><div class="fb-mutual"><div class="stack"><img src="https://i.pravatar.cc/100?img=8"><img src="https://i.pravatar.cc/100?img=9"></div> '+mutual+' mutual • '+u.city+'</div><div class="fb-actions"><button class="'+(isF?'btn-following':'btn-add')+'" onclick="togId('+u.id+')">'+(isF?'Following':'Follow')+'</button><button class="btn-msg" onclick="openC('+u.id+')">Message</button></div></div></div>';
+return '<div class="fb-friend"><img class="avatar" src="'+u.avatar+'" onclick="openP('+u.id+')"><div class="fb-friend-info"><b>'+u.name+'</b><div class="fb-mutual">'+mutual+' mutual • '+u.city+'</div><div class="fb-actions"><button class="'+(isF?'btn-following':'btn-add')+'" onclick="togId('+u.id+')">'+(isF?'Following':'Follow')+'</button><button class="btn-msg" onclick="openC('+u.id+')">Message</button></div></div></div>';
 }).join('');
 }
 async function openP(id){
@@ -300,8 +292,6 @@ document.getElementById('pPhotos').style.display=t=='photos'?'block':'none';
 document.getElementById('ptAbout').classList.toggle('active',t=='about');
 document.getElementById('ptFriends').classList.toggle('active',t=='friends');
 document.getElementById('ptPhotos').classList.toggle('active',t=='photos');
-if(t=='friends') loadProfileFriends();
-if(t=='photos') loadPhotos();
 }
 async function loadProfileFriends(){
 if(!view) return;
@@ -337,7 +327,6 @@ var res=await client.from('Love Seek').update({name:n,bio:b,city:c}).eq('id',cur
 if(res.error){alert(res.error.message);return;}
 cur=res.data[0];localStorage.setItem('currentUser',JSON.stringify(cur));view=cur;closeEdit();openP(cur.id);updateF();
 }
-// UPLOAD YOPHWEKA - POPANDA STORAGE
 async function uploadAvatar(input, isLeft){
 var file=input.files[0];if(!file) return;
 var reader=new FileReader();
@@ -357,7 +346,6 @@ document.getElementById('topA').src=small;
 document.getElementById('editPreview').src=small;
 var res=await client.from('Love Seek').update({avatar:small}).eq('id',cur.id).select();
 if(res.data){cur=res.data[0];localStorage.setItem('currentUser',JSON.stringify(cur)); render();}
-else if(res.error){alert(res.error.message);}
 };
 };
 reader.readAsDataURL(file);
@@ -385,4 +373,3 @@ if(cur) init();
 </script>
 </body>
 </html>
-            
